@@ -16,7 +16,6 @@ jobs:
     name: Node from input ${{ matrix.node-version}} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node-version: [12, 14, 16]
@@ -38,6 +37,18 @@ jobs:
         uses: actions/setup-node@main
         with:
           node-version-file: '.nvmrc'
+  version-file:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: Node from package.json on ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@main
+        with:
+          node-version-file: 'package.json'
   volta:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -46,6 +57,9 @@ jobs:
     name: Node from volta on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
+      - name: Remove engines from package.json
+        shell: bash
+        run: cat <<< "$(jq 'del(.engines)' .package.json)" > .package.json
       - name: Setup node
         uses: actions/setup-node@main
         with:
