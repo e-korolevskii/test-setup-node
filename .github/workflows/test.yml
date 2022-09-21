@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
-        uses: jef/setup-node@main
+        uses: actions/setup-node@main
         with:
           node-version-file: '.nvmrc'
   volta:
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
-        uses: jef/setup-node@main
+        uses: actions/setup-node@main
         with:
           node-version-file: 'package.json'
   toolversions:
@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup node
-        uses: jef/setup-node@main
+        uses: actions/setup-node@main
         with:
           node-version-file: '.tool-versions'
   
