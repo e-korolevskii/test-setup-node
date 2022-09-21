@@ -12,6 +12,20 @@ on:
       - "**.md"
 
 jobs:
+ basic:
+    name: Node from input ${{ matrix.node-version}} on ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [12, 14, 16]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node-version }}
   nvmrc:
     runs-on: ${{ matrix.os }}
     strategy:
