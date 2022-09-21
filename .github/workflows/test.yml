@@ -59,10 +59,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Remove engines from package.json
         shell: bash
-        run: cat <<< "$(jq 'del(.engines)' .package.json)" > .package.json
-      - name: Test pack
-        shell: bash
-        run: echo "$package.json"
+        run: cat <<< "$(jq 'del(.engines)' package.json)" > package.json
       - name: Setup node
         uses: actions/setup-node@main
         with:
