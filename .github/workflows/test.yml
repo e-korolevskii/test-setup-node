@@ -12,7 +12,7 @@ on:
       - "**.md"
 
 jobs:
- basic:
+  basic:
     name: Node from input ${{ matrix.node-version}} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
